@@ -7,6 +7,8 @@ const db = knex({
   connection: DB_URL,
 });
 
+console.log('knex and driver installed correctly');
+
 app.set('db', db);
 
 app.listen(PORT, () => {
