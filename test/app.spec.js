@@ -13,7 +13,7 @@ describe('App', () => {
 describe('Charater Endpoints', function() {
   let db = knex({
     client: 'pg',
-    connection: process.env.TEST_DB_URL,
+    connection: process.env.TEST_DATABASE_URL,
   });
   app.set('db', db);
 
