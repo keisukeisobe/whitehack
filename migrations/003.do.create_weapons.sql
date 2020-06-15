@@ -7,5 +7,6 @@ CREATE TABLE weapons (
   range INTEGER,
   fireRate INTEGER,
   cost INTEGER,
+  weight INTEGER NOT NULL,
   description TEXT
 );
