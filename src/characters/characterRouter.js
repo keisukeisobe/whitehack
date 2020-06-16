@@ -21,24 +21,20 @@ characterRouter.route('/characters')
   }
 })
 .post(jsonParser, (req, res, next) => {
-  try {
-    const {characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages} = req.body;
-    //class is protected keyword? cannot use in newCharacter object constructor
-    const newCharacter = {
-      characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages
-    };
-    const requiredFields = ['characterName', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterLevel', 'hitDie', 'experience', 'attackValue', 'savingThrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorClass', 'initiativeBonus', 'languages'];
-    //error validation
-    for (const key of requiredFields) {
-      if(!(key in req.body)){
-        return res.status(400).json({error: `Missing ${key} in request body`})
-      }
+  const {characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterClass, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages} = req.body;
+  //class is protected keyword? cannot use in newCharacter object constructor
+  const newCharacter = {
+    characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterClass, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages
+  };
+  const requiredFields = ['characterName', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterClass', 'characterLevel', 'hitDie', 'experience', 'attackValue', 'savingThrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorClass', 'initiativeBonus', 'languages'];
+  //error validation
+  for (const key of requiredFields) {
+    if(!(key in req.body)){
+      return res.status(400).json({error: `Missing ${key} in request body`})
     }
-    const db = req.app.get('db');
-    CharacterService.insertCharacter(db, newCharacter);
-  } catch(err) {
-    next(err);
   }
+  const db = req.app.get('db');
+  CharacterService.insertCharacter(db, newCharacter);
 });
 
 characterRouter.get('/:character_id', async (req, res, next) => {
