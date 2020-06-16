@@ -7,7 +7,7 @@ CREATE TABLE characters (
   intelligence INTEGER NOT NULL,
   charisma INTEGER NOT NULL,
   wisdom INTEGER NOT NULL,
-  class TEXT NOT NULL,
+  charcterclass TEXT NOT NULL,
   characterLevel INT,
   hitDie INT,
   experience INT,

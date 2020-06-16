@@ -1,6 +1,7 @@
 const express = require('express');
 const CharacterService = require('./characterService')
 const characterRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeAllCharacters = characters => ({
   characterName: characters.characterName,
@@ -8,12 +9,33 @@ const serializeAllCharacters = characters => ({
   dexterity: characters.dexterity
 });
 
-//for getting new characters
-characterRouter.get('/characters', async (req, res, next) => {
+//for getting all characters
+characterRouter.route('/characters')
+.get('/characters', async (req, res, next) => {
   try {
     const db = req.app.get('db');
     let characters = await CharacterService.getAllCharacters(db);
     res.json(characters);
+  } catch(err) {
+    next(err);
+  }
+})
+.post(jsonParser, (req, res, next) => {
+  try {
+    const {characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages} = req.body;
+    //class is protected keyword? cannot use in newCharacter object constructor
+    const newCharacter = {
+      characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages
+    };
+    const requiredFields = ['characterName', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterLevel', 'hitDie', 'experience', 'attackValue', 'savingThrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorClass', 'initiativeBonus', 'languages'];
+    //error validation
+    for (const key of requiredFields) {
+      if(!(key in req.body)){
+        return res.status(400).json({error: `Missing ${key} in request body`})
+      }
+    }
+    const db = req.app.get('db');
+    CharacterService.insertCharacter(db, newCharacter);
   } catch(err) {
     next(err);
   }
