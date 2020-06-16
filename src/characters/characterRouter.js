@@ -11,7 +11,7 @@ const serializeAllCharacters = characters => ({
 
 //for getting all characters
 characterRouter.route('/characters')
-.get('/characters', async (req, res, next) => {
+.get(async (req, res, next) => {
   try {
     const db = req.app.get('db');
     let characters = await CharacterService.getAllCharacters(db);
