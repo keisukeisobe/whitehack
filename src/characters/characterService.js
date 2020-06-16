@@ -7,7 +7,7 @@ const CharacterService = {
     return db.from('characters').where('id', id);
   },
   insertCharacter(db, newCharacter) {
-    return db.insert(newCharacter).into('characteres').returning('*')
+    return db.insert(newCharacter).into('characters').returning('*')
       .then(([character]) => character)
       .then(character => this.getCharacterById(db, character.id))
   }
