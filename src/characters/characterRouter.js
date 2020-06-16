@@ -21,20 +21,25 @@ characterRouter.route('/characters')
   }
 })
 .post(jsonParser, (req, res, next) => {
-  const {characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterClass, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages} = req.body;
+  const {charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages} = req.body;
   //class is protected keyword? cannot use in newCharacter object constructor
   const newCharacter = {
-    characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, characterClass, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages
+    charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages
   };
-  const requiredFields = ['characterName', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterClass', 'characterLevel', 'hitDie', 'experience', 'attackValue', 'savingThrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorClass', 'initiativeBonus', 'languages'];
+  const requiredFields = ['charactername', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterclass', 'characterlevel', 'hitdie', 'experience', 'attackvalue', 'savingthrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorclass', 'initiativebonus', 'languages'];
   //error validation
   for (const key of requiredFields) {
     if(!(key in req.body)){
       return res.status(400).json({error: `Missing ${key} in request body`})
     }
   }
+  console.log(newCharacter);
   const db = req.app.get('db');
-  CharacterService.insertCharacter(db, newCharacter);
+  CharacterService.insertCharacter(db, newCharacter)
+    .then(character => {
+      res.json(character);
+    })
+    .catch(next);
 });
 
 characterRouter.get('/:character_id', async (req, res, next) => {

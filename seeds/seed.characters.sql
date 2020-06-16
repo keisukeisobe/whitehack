@@ -4,7 +4,7 @@ TRUNCATE
   characters
   RESTART IDENTITY CASCADE;
 
-INSERT INTO characters (characterName, strength, dexterity, constitution, intelligence, charisma, wisdom, class, characterLevel, hitDie, experience, attackValue, savingThrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorClass, initiativeBonus, languages)
+INSERT INTO characters (charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages)
 VALUES
   (
     'Valtyra',
