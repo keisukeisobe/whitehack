@@ -10,6 +10,9 @@ const CharacterService = {
     return db.insert(newCharacter).into('characters').returning('*')
       .then(([character]) => character)
       .then(character => this.getCharacterById(db, character.id))
+  },
+  updateCharacter(db, character, id) {
+    return db('characters').where({id}).update(character);
   }
 };
 

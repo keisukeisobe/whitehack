@@ -1,0 +1,4 @@
+CREATE TABLE userchars (
+  user_id INTEGER REFERENCES login(login_id) ON DELETE CASCADE NOT NULL,
+  character_id INTEGER REFERENCES characters(id) ON DELETE CASCADE NOT NULL
+);
