@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const characterRouter = require('./characters/characterRouter');
-const CharacterService = require('./characters/characterService')
+const usersRouter = require('./users/usersRouter');
 
 const app = express();
 
@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', characterRouter);
+
+app.use('/api', usersRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

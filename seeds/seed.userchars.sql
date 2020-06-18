@@ -6,8 +6,6 @@ TRUNCATE
 
 INSERT INTO userchars(user_id, character_id)
 VALUES
-  (1, 1),
-  (2, 2),
-  (1, 35);
+  (1, 1);
 
 COMMIT;

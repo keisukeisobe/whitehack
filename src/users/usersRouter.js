@@ -31,9 +31,11 @@ usersRouter.route('/users')
             };
             return UsersService.insertUser(db, newUser)
               .then(user => {
-                res.status(201).location(path.posix.join(req.originalUrl, `/${user.id}`))
+                res.status(201).location(path.posix.join(req.originalUrl, `/${user.login_id}`))
                   .json(UsersService.serializeUser(user));
               })
           })
       })
-  })
+  });
+
+  module.exports = usersRouter;
