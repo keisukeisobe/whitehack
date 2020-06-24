@@ -27,7 +27,6 @@ characterRouter.route('/characters')
         return res.status(400).json({error: `Missing ${key} in request body`})
       }
     }
-    console.log(newCharacter);
     const db = req.app.get('db');
     CharacterService.insertCharacter(db, newCharacter)
       .then(character => {
@@ -41,7 +40,6 @@ characterRouter.route('/:character_id')
     try {
       const db = req.app.get('db');
       let character = await CharacterService.getCharacterById(db, req.params.character_id);
-      console.log(character);
       if (character != null){
         res.json(character[0]);
       } else {

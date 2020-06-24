@@ -10,7 +10,7 @@ const UsersService = {
     return db.from('login').select('*').where('username', username);
   },
   hasUserWithUserName(db, username) {
-    return db('login').where({username}).first().then(user => !!user);
+    return db.from('login').where({username}).first().then(user => !!user);
   },
   validatePassword(password) {
     if(password.length < 9) {
@@ -38,6 +38,9 @@ const UsersService = {
   },
   insertUser(db, newUser) {
     return db.insert(newUser).into('login').returning('*').then(([user]) => user);
+  },
+  updateUser(db, user) {
+    return db.from('login').where({username: user.username}).update(user);
   }
 };
 
