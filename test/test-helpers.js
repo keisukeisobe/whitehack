@@ -79,5 +79,6 @@ module.exports = {
   seedUsers,
   makeUsersArray,
   cleanTables,
-  seedTables
+  seedTables,
+  makeAuthHeader
 }

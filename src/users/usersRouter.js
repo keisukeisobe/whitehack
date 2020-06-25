@@ -40,7 +40,8 @@ usersRouter.route('/users')
   });
 
 usersRouter.route('/users/:user_id')
-  .all(requireAuth)
+  //uncomment to add authentication
+  //.all(requireAuth)
   .patch(jsonParser, (req, res, next) => {
     const {username, email, password} = req.body;
     const db = req.app.get('db');

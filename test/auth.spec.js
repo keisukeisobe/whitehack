@@ -2,6 +2,7 @@ const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 const jwt = require('jsonwebtoken');
+const { expect } = require('chai');
 
 describe('Auth login endpoints', function() {
   this.timeout(5000);
@@ -37,7 +38,12 @@ describe('Auth login endpoints', function() {
       return supertest(app)
         .post('/api/auth/login')
         .send(userValidCreds)
-        .expect(200, expectedReturn);
+        .expect(200)
+        .expect(res => {
+          const { authToken } = res.body;
+          const token = jwt.decode(authToken);
+          return expect(token.user_id).to.equal(1);
+        });
     });
     const requiredFields = ['username', 'password'];
     requiredFields.forEach(field => {
