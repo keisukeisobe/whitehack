@@ -34,7 +34,7 @@ const UsersService = {
     return {
       id: user.id,
       username: xss(user.username),
-    }
+    };
   },
   insertUser(db, newUser) {
     return db.insert(newUser).into('login').returning('*').then(([user]) => user);

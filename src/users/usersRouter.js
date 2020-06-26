@@ -34,9 +34,9 @@ usersRouter.route('/users')
               .then(user => {
                 res.status(201).location(path.posix.join(req.originalUrl, `/${user.login_id}`))
                   .json(UsersService.serializeUser(user));
-              })
-          })
-      })
+              });
+          });
+      });
   });
 
 usersRouter.route('/users/:user_id')
@@ -70,9 +70,9 @@ usersRouter.route('/users/:user_id')
               .then(user => {
                 res.status(201).location(path.posix.join(req.originalUrl, `/${user.login_id}`))
                   .json(UsersService.serializeUser(user));
-              })
-          })
-      })
+              });
+          });
+      });
 
   })
   .delete((req, res) => {
@@ -80,6 +80,6 @@ usersRouter.route('/users/:user_id')
     const {username, email, password} = req.body;
     db.from('login').where(username).del(); 
     res.send('Account deleted');
-  })
+  });
 
   module.exports = usersRouter;

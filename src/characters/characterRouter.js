@@ -1,5 +1,5 @@
 const express = require('express');
-const CharacterService = require('./characterService')
+const CharacterService = require('./characterService');
 const characterRouter = express.Router();
 const {requireAuth} = require('../middleware/jwt-auth');
 const jsonParser = express.json();
@@ -27,7 +27,7 @@ characterRouter.route('/characters')
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
-        return res.status(400).json({error: `Missing ${key} in request body`})
+        return res.status(400).json({error: `Missing ${key} in request body`});
       }
     }
     const db = req.app.get('db');
@@ -60,7 +60,7 @@ characterRouter.route('/:character_id')
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
-        return res.status(400).json({error: `Missing ${key} in request body`})
+        return res.status(400).json({error: `Missing ${key} in request body`});
       }
     }
     const db = req.app.get('db');
