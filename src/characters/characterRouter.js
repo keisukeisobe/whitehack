@@ -38,7 +38,7 @@ characterRouter.route('/characters')
       .catch(next);
   });
 
-characterRouter.route('/:character_id')
+characterRouter.route('/characters/:character_id')
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');

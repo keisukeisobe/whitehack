@@ -1,17 +1,17 @@
 const express = require("express");
-const EquipmentService = require("./equipmentService.js");
+const EquipmentService = require('./equipmentService.js');
 const equipmentRouter = express.Router();
 const { requireAuth } = require("../middleware/jwt-auth");
 const jsonParser = express.json();
 
 //for getting all equipment
 equipmentRouter
-  .route("/equipment")
+  .route('/equipment')
   //uncomment to add authentication
   //.all(requireAuth)
   .get(async (req, res, next) => {
     try {
-      const db = req.app.get("db");
+      const db = req.app.get('db');
       let equipment = await EquipmentService.getAllEquipment(db);
       res.json(equipment);
     } catch (err) {
