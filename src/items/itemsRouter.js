@@ -34,7 +34,7 @@ itemsRouter.route('/items')
       .catch(next);
   });
 
-itemsRouter.route('/:item_id')
+itemsRouter.route('/items/:item_id')
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');
