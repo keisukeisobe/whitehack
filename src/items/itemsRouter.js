@@ -10,7 +10,7 @@ itemsRouter.route('/items')
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');
-      let items = await ItemService.getAllCharacters(db);
+      let items = await ItemService.getAllItems(db);
       res.json(items);
     } catch(err) {
       next(err);

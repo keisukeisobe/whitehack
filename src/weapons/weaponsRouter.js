@@ -34,7 +34,7 @@ weaponsRouter.route('/weapons')
       .catch(next);
   });
 
-weaponsRouter.route('/:item_id')
+weaponsRouter.route('/weapons/:item_id')
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');
