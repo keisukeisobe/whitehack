@@ -25,14 +25,15 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
+    "minimist": "^1.2.5",
     "morgan": "^1.9.1",
     "pg": "^8.2.1",
     "xss": "^1.0.7"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "nodemon": "^1.19.4",
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4",
     "postgrator-cli": "^3.2.0",
     "supertest": "^4.0.2"
   }

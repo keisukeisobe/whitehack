@@ -1,10 +1,50 @@
 BEGIN;
 
 TRUNCATE
+  userchars,
+  characters,
+  login,
   items,
-  weapons,
-  equipment
+  equipment,
+  weapons
   RESTART IDENTITY CASCADE;
+
+INSERT INTO characters (charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages)
+VALUES
+  (
+    'Valtyra',
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    'Strong',
+    1,
+    1,
+    0,
+    10,
+    7,
+    1,
+    '',
+    '',
+    0,
+    '',
+    0,
+    30,
+    0,
+    0,
+    'Common'
+  );
+
+INSERT INTO login(username, password, email)
+VALUES
+  ('kitsune', '$2a$12$I1V21ZUYqqH2q5208w2DsuYv0FeBEJ/BLnPgCJavXyIQyn3QuA4qq', 'vng@brandeis.edu'),
+  ('keisuke', '$2a$12$I1V21ZUYqqH2q5208w2DsuYv0FeBEJ/BLnPgCJavXyIQyn3QuA4qq', 'keisuke.isobe.2011@gmail.com');
+
+INSERT INTO userchars(user_id, character_id)
+VALUES
+  (1, 1);
 
 INSERT INTO items (name, description, cost, weight)
 VALUES

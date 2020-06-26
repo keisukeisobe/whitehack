@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config');
 const characterRouter = require('./characters/characterRouter');
 const usersRouter = require('./users/usersRouter');
 const authRouter = require('./auth/authRouter');
+const equipmentRouter = require('./equipment/equipmentRouter');
 
 const app = express();
 
