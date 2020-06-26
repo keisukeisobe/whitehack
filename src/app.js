@@ -21,13 +21,17 @@ app.get("/", (req, res) => {
   res.send("App successfully loaded!");
 });
 
-app.use("/api", characterRouter);
+app.get("/ponies", function (req, res) {
+  res.send("Ponies!");
+});
 
-app.use("/api", usersRouter);
+app.use("/api", [authRouter, usersRouter, characterRouter, equipmentRouter]);
 
-app.use("/api", authRouter);
+//app.use("/api", usersRouter);
 
-app.use("/api", equipmentRouter);
+//app.use("/api", characterRouter);
+
+//app.use("/api", equipmentRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
