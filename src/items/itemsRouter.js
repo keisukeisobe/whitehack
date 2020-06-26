@@ -25,7 +25,7 @@ itemsRouter.route('/items')
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
-        return res.status(400).json({error: `Missing ${key} in request body`})
+        return res.status(400).json({error: `Missing ${key} in request body`});
       }
     }
     const db = req.app.get('db');
@@ -56,7 +56,7 @@ itemsRouter.route('/:item_id')
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
-        return res.status(400).json({error: `Missing ${key} in request body`})
+        return res.status(400).json({error: `Missing ${key} in request body`});
       }
     }
     const db = req.app.get('db');
