@@ -1,25 +1,25 @@
 const express = require('express');
-const itemsRouter = express.Router();
+const weaponsRouter = express.Router();
 const {requireAuth} = require('../middleware/jwt-auth');
-const ItemService = require('./itemsService');
+const WeaponsService = require('./weaponsService');
 const jsonParser = express.json();
 
-itemsRouter.route('/items')
+weaponsRouter.route('/weapons')
   //uncomment to add authentication
   //.all(requireAuth)
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');
-      let items = await ItemService.getAllCharacters(db);
-      res.json(items);
+      let weapons = await WeaponsService.getAllWeapons(db);
+      res.json(weapons);
     } catch(err) {
       next(err);
     }
   })
   .post(jsonParser, (req, res, next) => {
-    const {name, description, cost, weight} = req.body;
-    const newItem = {name, description, cost, weight};
-    const requiredFields = ['name', 'description', 'cost', 'weight'];
+    const {name, damageDie, damageBonus, special, range, fireRate, cost, weight, description} = req.body;
+    const newWeapons = {name, damageDie, damageBonus, special, range, fireRate, cost, weight, description};
+    const requiredFields = ['name', 'damageDie', 'damageBonus', 'special', 'range', 'fireRate', 'cost', 'weight', 'description'];
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
@@ -27,22 +27,22 @@ itemsRouter.route('/items')
       }
     }
     const db = req.app.get('db');
-    ItemService.insertItem(db, newItem)
+    WeaponsService.insertWeapon(db, newWeapons)
       .then(item => {
         res.json(item);
       })
       .catch(next);
   });
 
-itemsRouter.route('/:item_id')
+weaponsRouter.route('/:item_id')
   .get(async (req, res, next) => {
     try {
       const db = req.app.get('db');
-      let item = await ItemService.getItemById(db, req.params.item_id);
+      let item = await WeaponsService.getWeaponsById(db, req.params.item_id);
       if (item != null){
         res.json(item[0]);
       } else {
-        return res.status(404).json({error: 'Item does not exist'});
+        return res.status(404).json({error: 'Weapons does not exist'});
       }
     } catch(err) {
       next(err);
@@ -58,11 +58,11 @@ itemsRouter.route('/:item_id')
       }
     }
     const db = req.app.get('db');
-    ItemService.updateItem(db, item, item.id)
+    WeaponsService.updateWeapons(db, item, item.id)
       .then(item => {
         res.json(item);
       })
       .catch(next);
   });
 
-module.exports = itemsRouter;
+module.exports = weaponsRouter;
