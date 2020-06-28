@@ -165,6 +165,38 @@ function makeItemsArray() {
   ];
 }
 
+function makeEquipmentArray() {
+  return [
+    {
+      id: 1,
+      name: "Shield",
+      armorclass: "1",
+      cost: 5,
+      weight: 10,
+      special: "",
+      description: "Standard shield"
+    },
+    {
+      id: 2,
+      name: "Studded Leather",
+      armorclass: "2",
+      cost: 20,
+      weight: 20,
+      special: "",
+      description: "Studded leather armor. Sturdy."
+    },
+    {
+      id: 3,
+      name: "Full Plate",
+      armorclass: "6",
+      cost: 50,
+      weight: 60,
+      special: "",
+      description: "Heavy."
+    }    
+  ];
+}
+
 function cleanTables(db) {
   return db.raw(
     `TRUNCATE
@@ -181,17 +213,34 @@ function cleanTables(db) {
 function seedTables(db, users, items, equipment, weapons, characters){
   return db.transaction(async trx => {
     await seedUsers(db, users);
-    // await trx.into('books').insert(books);
-    // await trx.raw('SELECT setval(\'books_id_seq\', ?)', [books[books.length-1].id]);
-    // if (progress.length > 0){
-    //   await trx.into('progress').insert(progress);
-    //   await trx.raw('SELECT setval(\'progress_id_seq\', ?)', [progress[progress.length-1].id]);
-    // }
-    // if(ratings.length > 0){
-    //   await trx.into('ratings').insert(ratings);
-    //   await trx.raw('SELECT setval(\'ratings_id_seq\', ?)', [ratings[ratings.length-1].id]);
-    // }
+    if (characters.length > 0){
+      await trx.into('characters').insert(characters);
+      await trx.raw('SELECT setval(\'characters_id_seq\', ?)', [characters[characters.length-1].id]);  
+    }
+    if (items.length > 0){
+      await trx.into('items').insert(items);
+      await trx.raw('SELECT setval(\'items\', ?)', [items[items.length-1].id]);
+    }
+    if (equipment.length > 0){
+      await trx.into('equipment').insert(equipment);
+      await trx.raw('SELECT setval(\'equipment\', ?)', [equipment[equipment.length-1].id]);
+    }
+    if (weapons.length > 0){
+      await trx.into('weapons').insert(weapons);
+      await trx.raw('SELECT setval(\'weapons\', ?)', [weapons[weapons.length-1].id]);
+    }
   });
+}
+
+//function makeMaliciousCharacter/Item/Equipment/Weapon
+
+function makeFixtures() {
+  const testUsers = makeUsersArray();
+  const testCharacters = makeCharactersArray();
+  const testWeapons = makeWeaponsArray();
+  const testItems = makeWeaponsArray();
+  const testEquipment = makeEquipmentArray();
+  return {testUsers, testCharacters, testWeapons, testItems, testEquipment};
 }
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
@@ -204,6 +253,9 @@ module.exports = {
   makeUsersArray,
   makeCharactersArray,
   makeWeaponsArray,
+  makeItemsArray,
+  makeEquipmentArray,
+  makeFixtures,
   cleanTables,
   seedTables,
   makeAuthHeader
