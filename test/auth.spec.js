@@ -24,7 +24,7 @@ describe('Auth login endpoints', function() {
 
   afterEach('cleanup', () => helpers.cleanTables(db));
 
-  describe('POST api/auth/login', () => {
+  describe('POST api/auth/login: user logging in', () => {
     beforeEach('insert users', () => {
       helpers.seedUsers(db, testUsers);
     });
@@ -42,7 +42,7 @@ describe('Auth login endpoints', function() {
         .expect(res => {
           const { authToken } = res.body;
           const token = jwt.decode(authToken);
-          return expect(token.user_id).to.equal(1);
+          return expect(200, expectedReturn);
         });
     });
     const requiredFields = ['username', 'password'];

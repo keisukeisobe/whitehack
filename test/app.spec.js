@@ -3,14 +3,14 @@ const { expect } = require('chai');
 const knex = require('knex');
 
 describe('App', () => {
-  it('GET / responds with 200 containing "Hello, world!"', () => {
+  it('GET / responds with 200 containing ', () => {
     return supertest(app)
       .get('/')
-      .expect(200, 'Hello world!');
+      .expect(200, 'App successfully loaded!');
   });
 });
 
-describe('Charater Endpoints', function() {
+describe('Character Endpoints', function() {
   let db = knex({
     client: 'pg',
     connection: process.env.TEST_DATABASE_URL,
@@ -22,4 +22,6 @@ describe('Charater Endpoints', function() {
   before('clean the table', () => db('characters').truncate());
 
   this.afterEach('cleanup', () => db('characters').truncate());
+
+  
 });

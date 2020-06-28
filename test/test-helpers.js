@@ -41,6 +41,130 @@ function makeUsersArray() {
   ];
 }
 
+function makeCharactersArray() {
+  return [
+    {
+      id: 1,
+      charactername: "Valtyra",
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      charisma: 10,
+      wisdom: 10,
+      characterclass: "Strong",
+      characterlevel: 1,
+      hitdie: 1,
+      experience: 0,
+      attackvalue: 10,
+      savingthrow: 7,
+      slots: 1,
+      miracles: "",
+      groups: "",
+      raises: 0,
+      gold: "",
+      encumbrance: 0,
+      movement: 30,
+      armorclass: 0,
+      initiativebonus: 0,
+      languages: "Common"
+    },
+    {
+      id: 2,
+      charactername: "Morgan",
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      charisma: 10,
+      wisdom: 10,
+      characterclass: "Deft",
+      characterlevel: 1,
+      hitdie: 1,
+      experience: 0,
+      attackvalue: 10,
+      savingthrow: 7,
+      slots: 1,
+      miracles: "",
+      groups: "",
+      raises: 0,
+      gold: "",
+      encumbrance: 0,
+      movement: 30,
+      armorclass: 0,
+      initiativebonus: 0,
+      languages: "Common"
+    },
+  ];
+}
+
+function makeWeaponsArray() {
+  return [
+    {
+      id: 1,
+      name: "Axe",
+      damagedie: "1d6",
+      damagebonus: 1,
+      special: "",
+      range: 0,
+      firerate: 0,
+      cost: 10,
+      weight: 6,
+      description: "Typical axe"
+    },
+    {
+      id: 2,
+      name: "Javelin",
+      damagedie: "1d6",
+      damagebonus: 0,
+      special: "1d6-2 damage in melee",
+      range: 40,
+      firerate: 1,
+      cost: 2,
+      weight: 2,
+      description: "6 pack of throwing javelins"
+    },
+    {
+      id: 3,
+      name: "Scimitar",
+      damagedie: "1d6",
+      damagebonus: 0,
+      special: "+1 AV while riding",
+      range: 0,
+      firerate: 0,
+      cost: 8,
+      weight: 5,
+      description: "Curved swords"
+    }
+  ];
+}
+
+function makeItemsArray() {
+  return [
+    {
+      id: 1,
+      name: "Backpack",
+      description: "Standard adventuring gear with 30lb capacity",
+      cost: 5,
+      weight: 1
+    },
+    {
+      id: 2,
+      name: "Cart",
+      description: "Horse-drawn cart with 300lb capacity",
+      cost: 60,
+      weight: 500
+    },
+    {
+      id: 3,
+      name: "Grappling Hook",
+      description: "Lets you traverse",
+      cost: 5,
+      weight: 5
+    }
+  ];
+}
+
 function cleanTables(db) {
   return db.raw(
     `TRUNCATE
@@ -78,7 +202,9 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 module.exports = {
   seedUsers,
   makeUsersArray,
+  makeCharactersArray,
+  makeWeaponsArray,
   cleanTables,
   seedTables,
   makeAuthHeader
-}
+};

@@ -23,18 +23,7 @@ app.get("/", (req, res) => {
   res.send("App successfully loaded!");
 });
 
-app.get("/ponies", function (req, res) {
-  res.send("Ponies!");
-});
-
-// app.use("/api", [authRouter, usersRouter, characterRouter, equipmentRouter]);
-
-app.use('/api', authRouter);
-app.use('/api', usersRouter);
-app.use('/api', characterRouter);
-app.use('/api', equipmentRouter);
-app.use('/api', weaponsRouter);
-app.use('/api', itemsRouter);
+app.use("/api", [authRouter, usersRouter, characterRouter, equipmentRouter, itemsRouter, weaponsRouter]);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
