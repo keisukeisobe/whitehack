@@ -9,7 +9,7 @@ TRUNCATE
   weapons
   RESTART IDENTITY CASCADE;
 
-INSERT INTO characters (charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages)
+INSERT INTO characters (charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages, hp)
 VALUES
   (
     'Valtyra',
@@ -34,7 +34,8 @@ VALUES
     30,
     0,
     0,
-    'Common'
+    'Common',
+    8
   );
 
 INSERT INTO login(username, password, email)
