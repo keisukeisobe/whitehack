@@ -18,12 +18,12 @@ characterRouter.route('/characters')
     }
   })
   .post(jsonParser, (req, res, next) => {
-    const {charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages} = req.body;
+    const {charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages, hp} = req.body;
     //class is protected keyword? cannot use in newCharacter object constructor
     const newCharacter = {
-      charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages
+      charactername, strength, dexterity, constitution, intelligence, charisma, wisdom, characterclass, characterlevel, hitdie, experience, attackvalue, savingthrow, slots, miracles, groups, raises, gold, encumbrance, movement, armorclass, initiativebonus, languages, hp
     };
-    const requiredFields = ['charactername', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterclass', 'characterlevel', 'hitdie', 'experience', 'attackvalue', 'savingthrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorclass', 'initiativebonus', 'languages'];
+    const requiredFields = ['charactername', 'strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom', 'characterclass', 'characterlevel', 'hitdie', 'experience', 'attackvalue', 'savingthrow', 'slots', 'miracles', 'groups', 'raises', 'gold', 'encumbrance', 'movement', 'armorclass', 'initiativebonus', 'languages', 'hp'];
     //error validation
     for (const key of requiredFields) {
       if(!(key in req.body)){
