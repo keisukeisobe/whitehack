@@ -19,4 +19,19 @@ equipmentRouter
     }
   });
 
+equipmentRouter
+.route('/equipid/:itemid')
+//uncomment to add authentication
+//.all(requireAuth)
+.get(async (req, res, next) => {
+  try {
+    const db = req.app.get('db');
+    let equipment = await EquipmentService.getEquipmentId(db, req.params.itemid);
+    res.json(equipment);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 module.exports = equipmentRouter;
