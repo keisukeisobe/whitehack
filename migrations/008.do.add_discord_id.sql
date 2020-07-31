@@ -1,2 +1,2 @@
 ALTER TABLE characters
-ADD discord TEXT;
+ADD discord TEXT UNIQUE;
