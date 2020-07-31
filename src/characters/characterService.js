@@ -6,6 +6,9 @@ const CharacterService = {
   getCharacterById(db, id) {
     return db.from('characters').where('id', id);
   },
+  getCharacterByDiscord(db, discord) {
+    return db.from('characters').where('discord', discord);
+  },
   insertCharacter(db, newCharacter) {
     return db.insert(newCharacter).into('characters').returning('*')
       .then(([character]) => character)

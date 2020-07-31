@@ -4,6 +4,18 @@ const characterRouter = express.Router();
 const {requireAuth} = require('../middleware/jwt-auth');
 const jsonParser = express.json();
 
+
+characterRouter.route('/discord')
+  .get(async (req, res, next) => {
+    try {
+      const db = req.app.get('db');
+      console.log(req.query);
+      let character = await CharacterService.getCharacterByDiscord(db, req.query.discord);
+      res.json(character);
+    } catch(err) {
+      next(err);
+    }
+  })
 //for getting all characters
 characterRouter.route('/characters')
   //uncomment to add authentication
