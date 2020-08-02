@@ -62,4 +62,23 @@ equipmentRouter
       .catch(next);
   });
 
+equipmentRouter
+  .route("/equipment/:equipment_id")
+  .get(async (req, res, next) => {
+    try {
+      const db = req.app.get("db");
+      let equipment = await EquipmentService.getEquip(
+        db,
+        req.params.equipment_id
+      );
+      if (equipment != null) {
+        res.json(equipment[0]);
+      } else {
+        return res.status(404).json({ error: "Equipment does not exist" });
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
+
 module.exports = equipmentRouter;
